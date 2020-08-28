@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Face Comparing</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<style type="text/css">
+		#mainhead{
+	text-align: center;
+	font-weight: 400;
+}
+
+.mainp{
+	text-align: center;
+	line-height: 0.5
+}
+
+.container{
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+#img1,#img2{
+	width: 90%;
+	max-width: 330px;
+	height: 330px;
+	object-fit:contain;
+	margin-top: 20px;
+	margin-bottom: 20px;
+/*	display: inline !important;
+*/}
+
+.selectedimg{
+	border:3px solid #00b2e0;
+}
+
+.selectimg{
+	border:2px solid #00b2e0;
+}
+
+#im1, #im2{
+	text-align: center;
+}
+
+.scrollbar {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+
+div.scrollbar img {
+  display: inline-block;
+  margin:5px;
+  height: 90px;
+  width: 15%;
+  text-decoration: none;
+  object-fit: contain;
+  background-color: white;
+}
+
+.scrollbar{
+	background: #F5F5F5;
+	white-space: nowrap;
+}
+
+#style-2::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #fff;
+}
+
+#style-2::-webkit-scrollbar
+{
+	width: 0;
+	height: 7px;
+	background-color: #F5F5F5;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color:#ddd;
+}
+
+
+#inputs .col{
+	float: left;
+	margin: 0;
+	padding-bottom: 20px;
+}
+
+#urlinput{
+	width: 284px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	outline: 1px solid #bbb;
+
+}
+
+#urlbutton{
+
+	background-color: #00b2e0;
+	color: white;
+	border:none;
+	padding: 5px 40px 5px 40px;
+	cursor: pointer;
+
+}
+
+div.ex1 {
+  height: 500px;
+  width: 100%;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.contain{
+	margin-bottom:80px;
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-top: 40px;
+}
+
+#smallNav a{
+	text-decoration-line: none;
+	font-size: 1.1em;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 50%;
+	float: left;
+	list-style: none;
+	color: black;
+	background-color: #f6f7fb;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#smallNav .white{
+	background-color: white;
+	color: #00b2e0;
+}
+
+.col-8{
+	border-right: 30px solid white;
+}
+
+input#urlinput{
+	border:none;
+}
+
+
+#result{
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+button#upload{
+	width: 150px;
+	height: 35px;
+	background-color: white;
+	text-decoration: none;
+	border:1px solid #bbb;
+	border-radius: 2px;
+	position: absolute;
+	left: -80%; 
+}
+
+.fas{
+	color: #00b2e0;
+}
+
+input#myImg{
+	visibility: hidden;
+	position: absolute;
+	left: 21px;  
+	right: 0;	
+}
+
+button#upload:hover{
+	-webkit-transition:all 1s;
+	-moz-transition:all 1s;
+}
+
+#mainrow{
+	margin-top: 40px;
+}
+
+#maincol1{
+	background-color: #f6f7fb; padding-bottom: 20px; 
+}
+
+#style-2{
+	margin-right: 40px; 
+	margin-top: 20px; 
+	margin-bottom: 20px; 
+	margin-left: 40px;
+}
+
+#maincol2{
+	border:1px solid #ddd; padding:0;
+}
+	</style>
+
+</head>
+<body>
+	<h1 id="mainhead">Demo</h1>
+
+	<div class="container">
+		<p class="mainp">Try Face Comparing now by uploading local images, or providing image URLs.</p>
+		<p class="mainp">
+		This demo is built with Search API and FaceSet APIs. If you have any specific technical requirements, check the index below or contact us.</p>
+		<div class="row" id="mainrow">
+			<div class="col-8" id="maincol1">
+				<div class="row">
+				
+				<div class="col-md-6" id="im1">
+				<div id="image1">
+				<img id="img1" class="selectedimg " src="https://media.haircutinspiration.com/photos/20181204022913/Brush-Up-Square-500x667.jpg" >
+				</div>	
+				</div>	
+				<div class="col-md-6" id="im2">
+				<div id="image2" >
+				<img id="img2" src="https://hips.hearstapps.com/cosmouk.cdnds.net/cm/14/30/53d2e91c94839_-_or_12219eeb12706427431711.jpg"  >
+				</div>
+				</div>
+			<!-- 				<input type="submit" name="submit" id="mainsubmit">
+ -->			
+				</div>
+
+			<div class="scrollbar" id="style-2">
+			<img class=" selectimg small" src="https://media.haircutinspiration.com/photos/20181204022913/Brush-Up-Square-500x667.jpg">
+  			<img class="small" src="https://hips.hearstapps.com/cosmouk.cdnds.net/cm/14/30/53d2e91c94839_-_or_12219eeb12706427431711.jpg">
+  			<img class="small" src="http://4.bp.blogspot.com/-wJ94acz0rxA/UVm4WRHhdHI/AAAAAAAAIfs/v13LNkEaQSY/s1600/Amrita-Rao-Smiling-Cute-Face-Closeup.jpg">
+  			<img class="small" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2oOE-mM4SUlIddz0AU5OjVH0QBM8Rr-KzNO0uuFZOW9hm9r74">
+  			<img class="small" src="https://i.pinimg.com/originals/6a/b9/97/6ab9974510206785d15e2955ec636a5b.jpg">
+  			<img class="small" src="https://i.pinimg.com/originals/0c/d2/5e/0cd25e78c7b966b4779ab6164e603073.jpg">
+  			<img class="small" src="https://i.pinimg.com/236x/c4/b4/28/c4b428d2fbc372b0a0f9994f421d906d--gucci-spring-beauty-portrait.jpg">  
+  			<img class="small" src="https://i.pinimg.com/236x/be/ac/e7/beace76d6ce797a48e98ba26ed037277--rocknroll-funny-shit.jpg">
+  			<img class="small" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDYSUU2497alq8tb29h1UWR8vr0ydH9nhWVk6RWg1XFrxEoLfv">
+		</div>
+
+	<div class="row" id="inputs">
+		<div class="col-5">
+		<div class="row">
+		<div class="col-6">
+		<input type="file" accept="image/*" name="image" onchange="readURL(this)"  id="myImg" >
+		</div>
+		<div class="col-6">
+		<button id="upload"><i class="fas fa-upload"></i> Upload</button>	
+		</div>
+
+		</div>
+		</div>
+
+		<div class="col-7">
+		<form>
+			<div class="row">
+				<div class="col-8">
+			<input type="text" name="imageurl" placeholder="Image URL" id="urlinput">
+				</div>
+				<div class="col-4">
+			<button id="urlbutton">Go</button>
+				</div>
+			</div>
+		</form>
+		</div>
+	</div>
+
+			</div>
+
+	<div class="col-4" id="maincol2">
+	<div id="smallNav">
+  		
+   		 <a id="a1" class="white" href="#">Compare Result</a>
+  		
+    	<a id="a2"  href="#">Response JSON</a>
+  		
+ 	</div>
+ 	<span><div id="result" class="ex1">
+ 		Is same person:
+ 	</div></span>
+
+
+		</div>
+
+	</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<!--   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ -->
+	
+</body>
+</html>

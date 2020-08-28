@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+ 
+</head>
+<body>
+ 
+<input id="getdata" type="button"  value="Send X GET"/>
+<input id="postdata" type="button" value="Send X POST" />
+ 
+<script>
+$(document).ready(function()
+{
+    // var contentType ="application/x-www-form-urlencoded; charset=utf-8";
+ 
+    if(window.XDomainRequest)
+        contentType = "text/plain";
+ 
+    $("#postdata").click(function()
+    {
+        $.ajax({
+         url:"http://localhost:3000",
+         data:"name=Ravi&age=12",
+         type:"POST",
+         dataType:"json",   
+         // contentType:contentType,    
+         success:function(data)
+         {
+            alert("Data from Server"+JSON.stringify(data));
+         },
+         error:function(jqXHR,textStatus,errorThrown)
+         {
+            alert("You can not send Cross Domain AJAX requests: "+errorThrown);
+         }
+        });
+ 
+    });
+ 
+    $("#getdata").click(function()
+    {
+        $.ajax(
+        {
+         url:"http://hayageektest.appspot.com/cross-domain-cors/get.php?name=Ravi&age=32",
+         dataType:"json",
+         contentType:contentType,
+         success:function(data)
+         {
+            alert("Data from Server"+JSON.stringify(data));
+         },
+         error:function(jqXHR,textStatus,errorThrown)
+         {
+            alert("You can not send Cross Domain AJAX requests : "+errorThrown);
+         }
+        });
+ 
+    });
+ 
+});
+
+// $.ajax({
+
+//     url: 'https://www.googleapis.com/moderator/v1/series?key=',
+//     type: 'GET',
+//     crossDomain: true,
+//     dataType: 'jsonp',
+//     success: function() { alert("Success"); },
+//     error: function() { alert('Failed!'); },
+//     beforeSend: setHeader
+// })
+
+</script>
+
+<!-- <?php
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+ 
+if(isset($HTTP_RAW_POST_DATA)) {
+  parse_str($HTTP_RAW_POST_DATA,$arr); 
+  $arr['extra']='1.POST Request from hayageek.com';
+  echo json_encode($arr);
+}
+else
+{
+    $_POST['extra']='2.POST Request from hayageek.com';
+    echo json_encode($_POST);
+}
+?> -->
+</body>
+</html>
